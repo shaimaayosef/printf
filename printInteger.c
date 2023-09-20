@@ -2,40 +2,28 @@
 
 /**
  * printInteger - Prints an integer.
- * @args: Argument list containing the integer.
+ * @args_list: Argument list containing the integer.
  * Return: Number of printed characters.
  */
-
-int printInteger(va_list args)
+int printInteger(va_list args_list)
 {
-int num = va_arg(args, int);
-int length = 0, temp = num;
-char buffer[12]; /*For maximum int size*/
-char *ptr = &buffer[11]; /*Point to the last position*/
-*ptr = '\0';
-if (num == 0)
+int n, exp = 1, pr_count = 0;
+unsigned int cast;
+n = va_arg(args_list, int);
+if (n < 0)
 {
-_putchar('0');
-return (1);
+pr_count += _putchar('-');
+n *= -1;
 }
-else if (num < 0)
+cast = n;
+while (cast / exp > 9)
+exp *= 10;
+while (exp != 0)
 {
-_putchar('-');
-num = -num;
-length++;
+pr_count += _putchar((cast / exp)+'0');
+cast %= exp;
+exp /= 10;
 }
-while (temp)
-{
-ptr--;
-*ptr = (temp % 10) + '0';
-temp /= 10;
-}
-while (*ptr)
-{
-_putchar(*ptr);
-ptr++;
-length++;
+return (pr_count);
 }
 
-return (length);
-}

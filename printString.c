@@ -2,20 +2,17 @@
 
 /**
  * printString - Prints a string.
- * @args: Argument list containing the string.
+ * @args_list: Argument list containing the string.
  * Return: Number of printed characters.
  */
-int printString(va_list args)
+int printString(va_list args_list)
 {
-char *str = va_arg(args, char*);
-int length = 0;
-if (!str) /* Handle null pointers*/
+int pr_count = 0;
+char *str = va_arg(args_list, char*);
+if (str == NULL)
 str = "(null)";
-while (str[length]) /* Count the string length*/
-{
-_putchar(str[length]);
-length++;
-}
-return (length);
+while (str[pr_count] != '\0')
+pr_count += _putchar(str[pr_count]);
+return (pr_count);
 }
 
