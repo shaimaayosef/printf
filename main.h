@@ -13,7 +13,8 @@
  * @specifier: The format specifier.
  * @printer: The function to print the corresponding type.
  */
-typedef struct formatSP{
+typedef struct formatSP
+{
 	char *specifier;
 	int (*printer)();
 } fmt_spec_t;
