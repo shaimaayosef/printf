@@ -14,8 +14,8 @@
  * @printer: The function to print the corresponding type.
  */
 typedef struct formatSP{
-        char *specifier;
-        int (*printer)();
+	char *specifier;
+	int (*printer)();
 } fmt_spec_t;
 
 int _printf(const char *format, ...);
@@ -26,5 +26,3 @@ int printString(va_list args_list);
 int printInteger(va_list args_list);
 int printBinary(va_list args_list);
 #endif
-
-
