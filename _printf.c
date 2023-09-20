@@ -1,47 +1,29 @@
 #include "main.h"
 
 /**
- * _printf - Custom printf function
- * @format: The format string
- * Return: Number of characters printed
+ *_printf - Custom printf function.
+ * @format: Input format string.
+ * Return: Number of printed characters, or -1 for errors.
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0, count = 0;
-	spec_t specifiers[] = {
-		{'c', print_char},
-		{'s', print_string},
-		{'%', print_percent},
-		/* Add other specifiers here */
-		{'\0', NULL}
+	int printed_chars;
+	va_list args_list;
+
+	fmt_spec_t formatSP[] = {
+		{"c", printCharacter},
+		{"s", printString},
+		{"d", printInteger},
+		{"i", printInteger},
+		{"b", printBinary},
+		{NULL, NULL}
 	};
-	va_list args;
 
-	va_start(args, format);
-	while (format && format[i])
-	{
-		if (format[i] == '%' && format[i + 1] != '\0')
-		{
-			int j = 0;
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
 
-			while (specifiers[j].spec != '\0')
-			{
-				if (format[i + 1] == specifiers[j].spec)
-				{
-					count += specifiers[j].f(args);
-					i++;
-					break;
-				}
-				j++;
-			}
-		}
-		else
-		{
-			write(1, &format[i], 1);
-			count++;
-		}
-		i++;
-	}
-	va_end(args);
-	return (count);
+	va_start(args_list, format);
+	printed_chars = format_handle(format, args_list, formatSP);
+	va_end(args_list);
+	return (printed_chars);
 }
