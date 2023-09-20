@@ -15,4 +15,3 @@ while (str[pr_count] != '\0')
 pr_count += _putchar(str[pr_count]);
 return (pr_count);
 }
-
